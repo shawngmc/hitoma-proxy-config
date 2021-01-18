@@ -1,0 +1,12 @@
+huginn.hitoma.com {
+    proxy / http://192.168.1.76:4000 {
+        insecure_skip_verify
+        transparent
+    }
+    log /var/log/huginn.log
+    gzip
+    tls {
+        dns route53
+        wildcard
+    }
+}

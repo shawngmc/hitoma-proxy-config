@@ -1,0 +1,18 @@
+confluence.hitoma.com {
+    proxy /synchrony http://192.168.1.76:8091/synchrony {
+        websocket
+        without /synchrony
+        insecure_skip_verify
+    }
+    proxy / http://192.168.1.76:8090 {
+        except /synchrony
+        transparent
+        insecure_skip_verify      
+    }
+    log /var/log/confluence.log
+    gzip
+    tls {
+        dns route53
+        wildcard
+    }
+}

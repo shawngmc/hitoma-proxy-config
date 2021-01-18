@@ -1,0 +1,12 @@
+jenkins.hitoma.com {
+    proxy / http://192.168.1.76:58080 {
+        insecure_skip_verify
+	transparent
+    }
+    log /var/log/jenkins.log
+    gzip
+    tls {
+        dns route53
+        wildcard
+    }
+}

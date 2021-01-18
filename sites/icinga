@@ -1,0 +1,13 @@
+icinga.hitoma.com {
+    proxy / http://192.168.1.76:35080/ {
+        insecure_skip_verify
+        transparent
+        websocket
+    }
+    log /var/log/icinga.log
+    gzip
+    tls {
+        dns route53
+        wildcard
+    }
+}

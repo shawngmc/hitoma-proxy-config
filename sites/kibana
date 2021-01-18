@@ -1,0 +1,14 @@
+kibana.hitoma.com {
+    proxy / http://192.168.1.76:5601 {
+        insecure_skip_verify
+        transparent
+        websocket
+    }
+    log /var/log/kibana.log
+    basicauth / shawn testpass
+    gzip
+    tls {
+        dns route53
+        wildcard
+    }
+}
