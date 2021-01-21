@@ -7,12 +7,16 @@ services:
         deploy:
             restart_policy:
                 condition: any
+        environment:
+            AWS_ACCESS_KEY_ID: "(set in docker-compose.override.yaml)"
+            AWS_SECRET_ACCESS_KEY: "(set in docker-compose.override.yaml)"
         volumes:
             - './data/:/data'
             - './config/:/config'
             - './Caddyfile:/etc/caddy/Caddyfile'
             - './sites/:/etc/caddy/sites/'
             - './logs/:/logs/'
+            - './aws_creds:'
         ports:
             - '55080:80'
             - '55443:443'
