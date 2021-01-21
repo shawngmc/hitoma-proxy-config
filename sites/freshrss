@@ -5,5 +5,10 @@ freshrss.hitoma.com {
     log {
         output file /logs/freshrss.json 
     }
+    tls {
+        dns route53 {
+            max_retries 10
+        }
+    }
     encode zstd gzip
 }

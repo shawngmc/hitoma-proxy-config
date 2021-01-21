@@ -1,1 +1,8 @@
-import /etc/caddy/sites/*
+
+https://*.hitoma.com {
+    tls shawngmc@gmail.com {
+        dns route53 {
+        max_retries 10
+    }
+}
+
