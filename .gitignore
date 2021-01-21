@@ -1,0 +1,4 @@
+# Sensitive dirs created by caddy, locally mounted for convenience
+./data
+./config
+./logs

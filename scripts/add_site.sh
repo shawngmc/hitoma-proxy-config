@@ -6,9 +6,12 @@ then
   exit 1
 fi
 
-cp site.template ./temp.site
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+BASE_DIR=$(dirname "$DIR")
+
+cp $BASE_DIR/site.template ./temp.site
 sed -i "s/SUBDOMAIN/$1/g" temp.site
 sed -i "s/PROTOCOL/$2/g" temp.site
 sed -i "s/HOST/$3/g" temp.site
 sed -i "s/PORT/$4/g" temp.site
-mv temp.site ./sites/$1
+mv temp.site $BASE_DIR/config/sites/$1

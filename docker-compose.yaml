@@ -1,0 +1,19 @@
+version: "3"
+services:
+    caddy2:
+        build: 
+            context: .
+        container_name: caddy2
+        deploy:
+            restart_policy:
+                condition: any
+        volumes:
+            - './data/:/data'
+            - './config/:/config'
+            - './Caddyfile:/etc/caddy/Caddyfile'
+            - './sites/:/etc/caddy/sites/'
+            - './logs/:/logs/'
+        ports:
+            - '55080:80'
+            - '55443:443'
+        restart: always
