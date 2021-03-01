@@ -1,11 +1,15 @@
 SUBDOMAIN.hitoma.com {
-    proxy / PROTOCOL://HOST:PORT {
-        insecure_skip_verify
+  reverse_proxy PROTOCOL://HOST:PORT
+  log {
+    output file /logs/SUBDOMAIN.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
     }
-    log /var/log/SUBDOMAIN.log
+  }
+  encode {
+    zstd
     gzip
-    tls {
-        dns route53
-        wildcard
-    }
+  }
 }
