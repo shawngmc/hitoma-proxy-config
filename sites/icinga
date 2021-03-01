@@ -1,0 +1,15 @@
+icinga.hitoma.com {
+  reverse_proxy http://192.168.1.76:35080
+  log {
+    output file /logs/icinga.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

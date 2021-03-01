@@ -1,0 +1,15 @@
+portainer.hitoma.com {
+  reverse_proxy http://192.168.1.76:9000
+  log {
+    output file /logs/portainer.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

@@ -1,0 +1,15 @@
+jellyfin.hitoma.com {
+  reverse_proxy http://192.168.1.76:8096
+  log {
+    output file /logs/jellyfin.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

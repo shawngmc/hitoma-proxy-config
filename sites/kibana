@@ -1,0 +1,18 @@
+kibana.hitoma.com {
+  basicauth * {
+    shawn JDJhJDE0JHE4cENDOU5SMnBvZUUvNS9hOTJpby5sNjFnTlRtU2w5UklaeTFVSS5xZlBmLjllZU5JWmV1
+  }
+  reverse_proxy http://192.168.1.76:5601
+  log {
+    output file /logs/kibana.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}
