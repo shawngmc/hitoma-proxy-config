@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: caddy2
+  name: caddy2
+spec:
+  ports:
+    - name: "55080"
+      port: 55080
+      targetPort: 80
+    - name: "55443"
+      port: 55443
+      targetPort: 443
+  selector:
+    io.kompose.service: caddy2
+status:
+  loadBalancer: {}

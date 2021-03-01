@@ -1,6 +1,6 @@
 # Sensitive dirs created by caddy, locally mounted for convenience
-./data
-./config
-./logs
+data
+config
+logs
 
 docker-compose.override.yaml

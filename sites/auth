@@ -1,14 +1,20 @@
 auth.hitoma.com {
-    reverse_proxy * {
-        to http://192.168.1.76:19080
+  reverse_proxy http://192.168.1.76:19080
+  log {
+      output file /logs/auth.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
     }
-    log {
-        output file /logs/auth.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
     }
-    tls {
-        dns route53 {
-            max_retries 10
-        }
-    }
-    encode zstd gzip
+  }
+  encode {
+    zstd
+    gzip
+  }
 }

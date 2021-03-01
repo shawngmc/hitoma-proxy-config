@@ -4,15 +4,13 @@ services:
         build: 
             context: .
         container_name: caddy2
-        deploy:
-            restart_policy:
-                condition: any
         volumes:
             - './data/:/data'
             - './config/:/config'
             - './Caddyfile:/etc/caddy/Caddyfile'
             - './sites/:/etc/caddy/sites/'
             - './logs/:/logs/'
+            - './config/.aws-creds:/root/.aws/credentials'
         ports:
             - '55080:80'
             - '55443:443'

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: caddy2
+  name: caddy2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: caddy2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: caddy2
+    spec:
+      containers:
+        - image: caddy2
+          name: caddy2
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: caddy2-hostpath0
+            - mountPath: /config
+              name: caddy2-hostpath1
+            - mountPath: /etc/caddy/Caddyfile
+              name: caddy2-hostpath2
+            - mountPath: /etc/caddy/sites/
+              name: caddy2-hostpath3
+            - mountPath: /logs/
+              name: caddy2-hostpath4
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: /home/shawn/hitoma-proxy-config/data
+          name: caddy2-hostpath0
+        - hostPath:
+            path: /home/shawn/hitoma-proxy-config/config
+          name: caddy2-hostpath1
+        - hostPath:
+            path: /home/shawn/hitoma-proxy-config/Caddyfile
+          name: caddy2-hostpath2
+        - hostPath:
+            path: /home/shawn/hitoma-proxy-config/sites
+          name: caddy2-hostpath3
+        - hostPath:
+            path: /home/shawn/hitoma-proxy-config/logs
+          name: caddy2-hostpath4
+status: {}
