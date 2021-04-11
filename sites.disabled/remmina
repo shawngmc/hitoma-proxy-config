@@ -1,0 +1,19 @@
+remmina.hitoma.com {
+  reverse_proxy * {
+    to http://192.168.1.184:53389
+    transport http {
+    }
+  }
+  log {
+      output file /logs/remmina.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

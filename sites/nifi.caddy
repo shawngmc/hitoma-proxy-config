@@ -1,5 +1,6 @@
 nifi.hitoma.com {
   reverse_proxy http://192.168.1.76:7654
+  import snippets/basicauth-common
   log {
     output file /logs/nifi.json 
   }

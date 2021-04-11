@@ -1,0 +1,3 @@
+basicauth {
+	shawn <hashed_password_base64>
+}

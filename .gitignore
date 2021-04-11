@@ -4,3 +4,6 @@ config
 logs
 
 docker-compose.override.yaml
+
+# Active password file
+basicauth-common
