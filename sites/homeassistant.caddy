@@ -1,0 +1,15 @@
+homeassistant.hitoma.com {
+  reverse_proxy http://192.168.1.184:8123
+  log {
+    output file /logs/homeassistant.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}
