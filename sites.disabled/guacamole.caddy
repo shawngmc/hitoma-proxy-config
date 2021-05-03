@@ -6,7 +6,7 @@ guacamole.hitoma.com {
   }
   #rewrite @nguac /guacamole/{path}
   redir / /guacamole/ 308
-  reverse_proxy 192.168.1.184:4080
+  reverse_proxy 192.168.1.76:4080
   log {
     output file /logs/guacamole.json
   }
