@@ -1,6 +1,6 @@
 auth.hitoma.com {
   reverse_proxy * {
-    to https://192.168.1.184:19080
+    to https://192.168.1.184:19443
     transport http {
       tls_insecure_skip_verify
     }
