@@ -1,0 +1,15 @@
+SUBDOMAIN.hitoma.com {
+  reverse_proxy PROTOCOL://HOST:PORT
+  log {
+    output file /logs/SUBDOMAIN.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

@@ -1,10 +1,10 @@
-SUBDOMAIN.hitoma.com {
+wikijs.hitoma.com {
   reverse_proxy * {
-    to PROTOCOL://HOST:PORT
+    to 192.168.1.184:33080
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/SUBDOMAIN.json
+    output file /logs/wikijs.json
   }
   tls {
     dns route53 {

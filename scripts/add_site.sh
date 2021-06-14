@@ -14,4 +14,4 @@ sed -i "s/SUBDOMAIN/$1/g" temp.site
 sed -i "s/PROTOCOL/$2/g" temp.site
 sed -i "s/HOST/$3/g" temp.site
 sed -i "s/PORT/$4/g" temp.site
-mv temp.site $BASE_DIR/sites/$1
+mv temp.site $BASE_DIR/sites/$1.caddy
