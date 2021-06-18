@@ -1,10 +1,12 @@
 kibana.hitoma.com {
-  basicauth * {
-    shawn JDJhJDE0JHE4cENDOU5SMnBvZUUvNS9hOTJpby5sNjFnTlRtU2w5UklaeTFVSS5xZlBmLjllZU5JWmV1
+  import snippets/basicauth-common
+  reverse_proxy * {
+    to 192.168.1.184:5601
+
+    header_down Set-Cookie ^.*$ "$0; Secure"
   }
-  reverse_proxy http://192.168.1.184:5601
   log {
-    output file /logs/kibana.json 
+    output file /logs/kibana.json
   }
   tls {
     dns route53 {
@@ -13,6 +15,21 @@ kibana.hitoma.com {
   }
   encode {
     zstd
-    gzip
+  }
+  header { 
+    # disable FLoC tracking
+    Permissions-Policy interest-cohort=()
+
+    # enable HSTS
+    Strict-Transport-Security max-age=31536000;
+
+    # disable clients from sniffing the media type
+    ?X-Content-Type-Options nosniff
+
+    # clickjacking protection
+    ?X-Frame-Options DENY
+
+    # keep referrer data off of HTTP connections
+    ?Referrer-Policy no-referrer-when-downgrade
   }
 }

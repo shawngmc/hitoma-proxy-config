@@ -1,12 +1,12 @@
 nodered.hitoma.com {
+  import snippets/basicauth-common
   reverse_proxy * {
     to http://192.168.1.184:1880
-    transport http {
-    }
+    
+    header_down Set-Cookie ^.*$ "$0; Secure"
   }
-  import snippets/basicauth-common
   log {
-      output file /logs/nodered.json 
+    output file /logs/nodered.json
   }
   tls {
     dns route53 {
@@ -15,6 +15,21 @@ nodered.hitoma.com {
   }
   encode {
     zstd
-    gzip
+  }
+  header { 
+    # disable FLoC tracking
+    Permissions-Policy interest-cohort=()
+
+    # enable HSTS
+    Strict-Transport-Security max-age=31536000;
+
+    # disable clients from sniffing the media type
+    ?X-Content-Type-Options nosniff
+
+    # clickjacking protection
+    ?X-Frame-Options DENY
+
+    # keep referrer data off of HTTP connections
+    ?Referrer-Policy no-referrer-when-downgrade
   }
 }

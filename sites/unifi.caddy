@@ -1,12 +1,15 @@
 unifi.hitoma.com {
+  import snippets/basicauth-common
   reverse_proxy * {
     to https://192.168.1.163:443
     transport http {
       tls_insecure_skip_verify
     }
+    
+    header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-      output file /logs/unifi.json 
+    output file /logs/unifi.json
   }
   tls {
     dns route53 {
@@ -15,6 +18,21 @@ unifi.hitoma.com {
   }
   encode {
     zstd
-    gzip
+  }
+  header { 
+    # disable FLoC tracking
+    Permissions-Policy interest-cohort=()
+
+    # enable HSTS
+    Strict-Transport-Security max-age=31536000;
+
+    # disable clients from sniffing the media type
+    ?X-Content-Type-Options nosniff
+
+    # clickjacking protection
+    ?X-Frame-Options DENY
+
+    # keep referrer data off of HTTP connections
+    ?Referrer-Policy no-referrer-when-downgrade
   }
 }
