@@ -1,11 +1,11 @@
-coder.hitoma.com {
+miniflux.hitoma.com {
   reverse_proxy * {
-    to 192.168.1.184:13000
+    to 192.168.1.184:43280
 
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/coder.json
+    output file /logs/miniflux.json
   }
   tls {
     dns route53 {
@@ -26,8 +26,7 @@ coder.hitoma.com {
     ?X-Content-Type-Options nosniff
 
     # clickjacking protection
-    # ?X-Frame-Options DENY
-    # Disabled for HTML preview, extension descriptions
+    ?X-Frame-Options DENY
 
     # keep referrer data off of HTTP connections
     ?Referrer-Policy no-referrer-when-downgrade
