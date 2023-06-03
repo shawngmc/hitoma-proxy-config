@@ -1,18 +1,8 @@
-minio.hitoma.com {
-  reverse_proxy * {
-    to https://192.168.1.210:9002
-    transport http {
-      tls_insecure_skip_verify
-    } 
-    header_down Set-Cookie ^.*$ "$0; Secure"
-  }
+customtldtest.nas {
+  root * /static
+  file_server
   log {
-    output file /logs/minio.json
-  }
-  tls {
-    dns route53 {
-      max_retries 10
-    }
+    output file /logs/customtldtest.nas.json
   }
   encode {
     zstd

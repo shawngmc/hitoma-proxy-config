@@ -1,0 +1,20 @@
+authentik.hitoma.com {
+  reverse_proxy * {
+    to https://192.168.1.184:11443
+    transport http {
+      tls_insecure_skip_verify
+    }
+  }
+  log {
+      output file /logs/authentik.json 
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+    gzip
+  }
+}

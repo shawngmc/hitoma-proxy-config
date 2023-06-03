@@ -1,13 +1,11 @@
-minio.hitoma.com {
+baserow.hitoma.com {
   reverse_proxy * {
-    to https://192.168.1.210:9002
-    transport http {
-      tls_insecure_skip_verify
-    } 
+    to 192.168.1.184:6788
+
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/minio.json
+    output file /logs/baserow.json
   }
   tls {
     dns route53 {
