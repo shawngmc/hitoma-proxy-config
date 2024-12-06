@@ -1,0 +1,20 @@
+guacamole.hitoma.com {
+  @nguac {
+    not path /guacamole/*
+  }
+  #rewrite @nguac /guacamole/{path}
+  redir @nguac /guacamole/ 308
+  reverse_proxy http://192.168.1.118:4080
+  log {
+    output file /logs/guacamole.json
+  }
+  tls {
+    dns route53 {
+    max_retries 10
+      }
+  }
+  encode {
+      zstd
+      gzip
+  }
+}

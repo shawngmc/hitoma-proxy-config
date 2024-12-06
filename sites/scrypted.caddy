@@ -1,10 +1,14 @@
-wikijs.hitoma.com {
+scrypted.hitoma.com {
   reverse_proxy * {
-    to 192.168.1.118:33080
+    to https://192.168.1.85:10443
+    transport http {
+      tls_insecure_skip_verify
+    }
+    
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/wikijs.json
+    output file /logs/scrypted.json
   }
   tls {
     dns route53 {
@@ -23,9 +27,6 @@ wikijs.hitoma.com {
 
     # disable clients from sniffing the media type
     ?X-Content-Type-Options nosniff
-
-    # clickjacking protection
-    ?X-Frame-Options DENY
 
     # keep referrer data off of HTTP connections
     ?Referrer-Policy no-referrer-when-downgrade

@@ -1,10 +1,10 @@
-wikijs.hitoma.com {
+embercleave.logs.local.hitoma.com {
   reverse_proxy * {
-    to 192.168.1.118:33080
+    to http://192.168.1.182:9999
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/wikijs.json
+    output file /logs/logs.embercleave.json
   }
   tls {
     dns route53 {
