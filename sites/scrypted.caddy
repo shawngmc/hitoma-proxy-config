@@ -1,6 +1,6 @@
 scrypted.hitoma.com {
   reverse_proxy * {
-    to https://192.168.1.85:10443
+    to https://192.168.1.118:33443
     transport http {
       tls_insecure_skip_verify
     }
