@@ -1,0 +1,36 @@
+frigate.hitoma.com {
+  reverse_proxy * {
+    to http://192.168.1.210:30058
+    transport http {
+    }
+    
+    header_down Set-Cookie ^.*$ "$0; Secure"
+  }
+  log {
+    output file /logs/unifi.json
+  }
+  tls {
+    dns route53 {
+      max_retries 10
+    }
+  }
+  encode {
+    zstd
+  }
+  header { 
+    # disable FLoC tracking
+    Permissions-Policy interest-cohort=()
+
+    # enable HSTS
+    Strict-Transport-Security max-age=31536000;
+
+    # disable clients from sniffing the media type
+    ?X-Content-Type-Options nosniff
+
+    # clickjacking protection
+    ?X-Frame-Options DENY
+
+    # keep referrer data off of HTTP connections
+    ?Referrer-Policy no-referrer-when-downgrade
+  }
+}
