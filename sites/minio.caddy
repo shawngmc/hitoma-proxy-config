@@ -1,13 +1,14 @@
-nextcloud.hitoma.com {
+minio.hitoma.com {
   reverse_proxy * {
-    to http://192.168.1.210:33026
+    to https://192.168.1.210:9000
     transport http {
+      tls_insecure_skip_verify
     }
     
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/nextcloud.json
+    output file /logs/minio.json
   }
   tls {
     dns route53 {

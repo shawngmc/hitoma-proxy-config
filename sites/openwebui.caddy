@@ -1,13 +1,11 @@
-nextcloud.hitoma.com {
+openwebui.hitoma.com {
   reverse_proxy * {
-    to http://192.168.1.210:33026
-    transport http {
-    }
+    to http://192.168.1.118:3000
     
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/nextcloud.json
+    output file /logs/openwebui.json
   }
   tls {
     dns route53 {

@@ -16,3 +16,5 @@ services:
             - '55080:80'
             - '55443:443'
         restart: always
+        environment:
+            - AWS_REGION=us-east-1
