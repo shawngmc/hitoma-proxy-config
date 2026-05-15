@@ -1,14 +1,14 @@
-frigate.hitoma.com {
+forgejo.hitoma.com {
   reverse_proxy * {
-    to https://192.168.1.210:30058
-    transport http {
-      tls_insecure_skip_verify
-    }
-    
+    to http://192.168.1.210:30142
+    #transport http {
+    #  tls_insecure_skip_verify
+    #}
+
     header_down Set-Cookie ^.*$ "$0; Secure"
   }
   log {
-    output file /logs/frigate.json
+    output file /logs/forgejo.json
   }
   tls {
     dns route53 {
@@ -18,7 +18,7 @@ frigate.hitoma.com {
   encode {
     zstd
   }
-  header { 
+  header {
     # disable FLoC tracking
     Permissions-Policy interest-cohort=()
 
@@ -35,3 +35,4 @@ frigate.hitoma.com {
     ?Referrer-Policy no-referrer-when-downgrade
   }
 }
+
