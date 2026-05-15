@@ -15,6 +15,7 @@ services:
         ports:
             - '55080:80'
             - '55443:443'
+            - '2019:2019'
         restart: always
         environment:
             - AWS_REGION=us-east-1
